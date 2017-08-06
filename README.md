@@ -1,6 +1,10 @@
 # Keras Weight Animator
 
-Save [Keras](http://keras.io) weight matrices as videos to better understand what and how your neural network models are learning.
+Save [Keras](http://keras.io) weight matrices as short animated videos to better understand what and how your neural network models are learning. Below are examples of the first LSTM layer and the final output layer of a six-class RNN model trained over one epoch. Red represents low values and blue represents high values.
+
+![Example Animation 2](.images/epoch_000-lstm_1-weights_02.gif)
+
+![Example Animation 1](.images/epoch_000-layer_dense_1-weights_02.gif)
 
 ## Getting Started
 
@@ -14,7 +18,7 @@ cd keras_weight_animator
 pip install -r requirements.txt
 ```
 
-In order to render videos from the saved weight images you must also have the following packages to be installed on your machine:
+In order to render videos from the saved weight images you must also have the following packages installed on your machine:
 
 - [GNU Parallel](https://www.gnu.org/software/parallel/)
 - [ImageMagick](https://www.imagemagick.org/script/index.php)
@@ -22,18 +26,18 @@ In order to render videos from the saved weight images you must also have the fo
 
 ### Using the Module
 
-This package is exposed as a module named `keras_weight_animator`. It exposes a [Keras callback](https://keras.io/callbacks/) function that you can include in any model `fit` method.
+This module is named `keras_weight_animator`. It exposes a [Keras callback](https://keras.io/callbacks/) function that you can include in any model `fit` method.
 
 ```python
-## you can optionally add this module to your python path
-## by including its parent directory in sys.path
+## you can optionally add this module to your python path by appending 
+## its parent directory in sys.path. Uncomment below to do this.
 # import sys
 # sys.path.append('path/to/keras_weight_animator/..')
 
 from keras_weight_animator import image_saver_callback
 
 # assumes a keras model named "model"
-callbacks = [image_saver_callback(model, 'weight_image_sequences')]
+callbacks = [image_saver_callback(model, 'output_directory')]
 
 model.fit(X_train, y_train, callbacks=callbacks)
 ```
@@ -77,7 +81,7 @@ Using a bash script to leverage parallel, ImageMagick, and FFMPEG isn't necessar
 
 ## Attribution and License
 
-This module is ♥ © Brannon Dorsey 2017 ♥, released under an MIT License. You are free to use, modify, distribute, sell, etc... this software under those terms. Example data is from the WIreless Sensor Datamining Actitracker dataset published by Fordham University:
+This module is © Brannon Dorsey 2017, released under an ♥ MIT License ♥. You are free to use, modify, distribute, sell, etc... this software under [those terms](LICENSE). Example data is from the WIreless Sensor Datamining Actitracker dataset published by Fordham University:
 
 ```
 Jennifer R. Kwapisz, Gary M. Weiss and Samuel A. Moore (2010). Activity Recognition using Cell Phone Accelerometers, Proceedings of the Fourth International Workshop on Knowledge Discovery from Sensor Data (at KDD-10), Washington DC. [PDF]
