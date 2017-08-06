@@ -42,7 +42,7 @@ callbacks = [image_saver_callback(model, 'output_directory')]
 model.fit(X_train, y_train, callbacks=callbacks)
 ```
 
-The two required parameters to `image_saver_callback(...)` are the Keras `model` and an `output_directory` to periodically save weight images to. By default, `keras_weight_animator` saves layer weights every 100 batches to `output_directory` as PNGs in folders named `epoch_XXX-layer_NAME-weights_YY`. Once training is complete, you can optionally create short animated video clips from the image sequences saved in `output_directory` using [`bin/create_image_sequence.sh](bin/create_image_sequence.sh) path/to/output_directory`. This will use `parallel`, `mogrify`, and `ffmpeg` to create a `.mp4` from the image sequences located in each folder of `output_directory`. Video files will be named like `epoch_XXX-layer_NAME-weights_YY.mp4`. 
+The two required parameters to `image_saver_callback(...)` are the Keras `model` and an `output_directory` to periodically save weight images to. By default, `keras_weight_animator` saves layer weights every 100 batches to `output_directory` as PNGs in folders named `epoch_XXX-layer_NAME-weights_YY`. Once training is complete, you can optionally create short animated video clips from the image sequences saved in `output_directory` using [`bin/create_image_sequence.sh](bin/create_image_sequence.sh) path/to/output_directory`. This will use `parallel`, `mogrify`, and `ffmpeg` to create a `.mp4` from the image sequences located in each folder of `output_directory`. Video files will be named like `epoch_XXX-layer_NAME-weights_YY.mp4`. You can run this script automatically from your training script by passing the `render_videos=True` parameter to `image_saver_callback(...)`.
 
 ## Optional Parameters 
 
