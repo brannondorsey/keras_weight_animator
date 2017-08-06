@@ -70,9 +70,9 @@ cd data
 curl http://www.cis.fordham.edu/wisdm/includes/datasets/latest/WISDM_ar_latest.tar.gz -o WISDM_ar_latest.tar.gz
 tar -xzf WISDM_ar_latest.tar.gz
 rm WISDM_ar_latest.tar.gz
-cd ..
+cd ../example
 
-python example/wisdm.py
+python wisdm.py
 ```
 
 ## Thoughts
