@@ -1,5 +1,6 @@
 import sys
 sys.path.append('../..')
+print(sys.path)
 
 import csv
 import numpy as np
@@ -39,7 +40,7 @@ def get_data(batch_size):
 	data = []
 	# load the csv
 	print('LOADING DATA')
-	with open('./data/WISDM_ar_v1.1/WISDM_ar_v1.1_raw.txt', 'r') as f:
+	with open('../data/WISDM_ar_v1.1/WISDM_ar_v1.1_raw.txt', 'r') as f:
 	    reader = csv.reader(f)
 	    for row in reader:
 	        # some of the data has bad lines, ignore
@@ -107,7 +108,7 @@ def main():
 	# number of training samples must be a multiple of the batch size (32)
 	model = get_model(60) # window size of 60 (3 seconds of accelerometer data @ 20hz)
 	# add the weight animator image_saver_callback to save image sequences each 100 batches
-	callbacks = [image_saver_callback(model, './data/wisdm', interval=100, cmap='bwr', render_videos=True)]
+	callbacks = [image_saver_callback(model, '../data/wisdm', interval=100, cmap='bwr', render_videos=True)]
 	
 	# fit and evaluate our model
 	print('FITTING MODEL')
