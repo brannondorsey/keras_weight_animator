@@ -18,6 +18,18 @@ else
 	exit 1
 fi
 
+check() {
+	$(which $1 &> /dev/null)
+	if [ $? -ne 0 ] ; then
+		if [ $1 == 'mogrifyl' ] ; then
+			echo "please install imagemagick"
+		else
+			echo "please install $1"
+		fi
+		exit 1
+	fi
+}
+
 upscale() {
 	FILE="$1"
 	SIZE="$2"
@@ -26,6 +38,10 @@ upscale() {
 }
 
 export -f upscale
+
+check parallel
+check mogrify
+check ffmpeg
 
 # for each image directory
 for DIR in $(find $INPUT_DIR -type d -name 'epoch_*') ; do

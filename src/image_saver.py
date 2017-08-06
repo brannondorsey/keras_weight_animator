@@ -6,6 +6,7 @@ from keras.callbacks import LambdaCallback
 # global for closure, gross
 current_epoch = 0
 
+# returns a keras callback
 def image_saver_callback(model, directory, interval=100, cmap='gray', render_videos=False):
     
     def save_image(weights, batch, layer_name, i):
