@@ -1,6 +1,6 @@
 # Keras Weight Animator
 
-Save [Keras](http://keras.io) weight matrices as short animated videos to better understand what and how your neural network models are learning. Below are examples of the first LSTM layer and the final output layer of a six-class RNN model trained over one epoch. Red represents low values and blue represents high values.
+Save [Keras](http://keras.io) weight matrices as short animated videos to better understand what and how your neural network models are learning. Below are examples of the first LSTM layer and the final output layer of a six-class RNN model trained over one epoch. Blue represents low values and red represents high values.
 
 ![Example Animation 2](.images/epoch_000-lstm_1-weights_02.gif)
 
