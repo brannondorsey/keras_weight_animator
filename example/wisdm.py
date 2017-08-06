@@ -1,6 +1,5 @@
 import sys
 sys.path.append('../..')
-print(sys.path)
 
 import csv
 import numpy as np
