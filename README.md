@@ -22,11 +22,11 @@ In order to render videos from the saved weight images you must also have the fo
 
 - [GNU Parallel](https://www.gnu.org/software/parallel/)
 - [ImageMagick](https://www.imagemagick.org/script/index.php)
-- [FFMPEG](https://ffmpeg.org/download.html)
+- [FFmpeg](https://ffmpeg.org/download.html)
 
 ### Using the Module
 
-This module is named `keras_weight_animator`. It exposes a [Keras callback](https://keras.io/callbacks/) function that you can include in any model `fit` method.
+This module is named `keras_weight_animator`. It exposes a [Keras callback](https://keras.io/callbacks/) function that you can include in any model `fit(...)` method.
 
 ```python
 ## you can optionally add this module to your python path by appending 
