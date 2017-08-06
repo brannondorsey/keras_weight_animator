@@ -48,13 +48,14 @@ The two required parameters to `image_saver_callback(...)` are the Keras `model`
 
 `weight_image_sequences(...)` takes a variety of optional keyword arguments.
 
-- `interval` (default=`100`): Save weight images every `interval` batches. `interval=1` would save weights for every batch.
+- `epoch_interval` (default=`1`): Save weight images every `epoch_interval` epochs. Saves weights every epoch by default, but you may want to change this if you are training for lots of epochs.
+- `batch_interval` (default=`100`): Save weight images every `batch_interval` batches. `batch_interval=1` would save weights for every batch.
 - `cmap` (default='gray'): [Matplotlib color map](http://matplotlib.org/users/colormaps.html) name. I recommend trying some diverging color maps, especially `RdBu`. 
 - `render_videos` (default=`False`): Optionally make a system call to `create_image_sequences.sh <output_directory>` at the end of `model.fit()` (using the Keras `on_train_end(...)` function internally). Setting this to `True` will automagically render `.mp4` videos for you (watch the console for errors).
 
 ```bash
 # example
-callbacks = [image_saver_callback(model, 'weight_image_sequences', interval=1000, cmap='gray', render_videos=True)]
+callbacks = [image_saver_callback(model, 'weight_image_sequences', epoch_interval=10, batch_interval=1000, cmap='gray', render_videos=True)]
 model.fit(X_train, y_train, callbacks=callbacks)
 ```
 

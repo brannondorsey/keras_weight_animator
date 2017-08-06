@@ -7,7 +7,7 @@ from keras.callbacks import LambdaCallback
 current_epoch = 0
 
 # returns a keras callback
-def image_saver_callback(model, directory, interval=100, cmap='gray', render_videos=False):
+def image_saver_callback(model, directory, epoch_interval=1, batch_interval=100, cmap='gray', render_videos=False):
     
     def save_image(weights, batch, layer_name, i):
         global current_epoch
@@ -22,7 +22,8 @@ def image_saver_callback(model, directory, interval=100, cmap='gray', render_vid
         plt.imsave(name, weights, cmap=cmap)
     
     def save_weight_images(batch, logs):
-        if batch % interval == 0:
+        global current_epoch
+        if current_epoch % epoch_interval == 0 and batch % batch_interval == 0:
             for layer in model.layers:
                 if len(layer.get_weights()) > 0:
                     for i, weights in enumerate(layer.get_weights()):

@@ -10,7 +10,7 @@ from keras.layers import Dense, Activation, Dropout
 from keras.layers.recurrent import LSTM
 from keras_weight_animator import image_saver_callback
 
-def get_data(batch_size):
+def get_data(batch_size, window_size):
 
 	def activity_as_int(activity):
 	    if activity == 'Walking':
@@ -64,7 +64,6 @@ def get_data(batch_size):
 	z = preprocessing.MinMaxScaler(feature_range=(-1.0, 1.0)).fit_transform(z)
 
 	split = 0.85
-	window_size = 60 # 20hz sample rate, so we use a window size of 3 seconds
 	targets = to_categorical([activity_as_int(d[1]) for d in data], 6)
 	inputs, targets = get_sliding_windows(zip(x, y, z), targets, window_size)
 
@@ -75,7 +74,7 @@ def get_data(batch_size):
 	y_test  = targets[int(len(targets) * split):]
 
 	# make the number of samples a multiple of the batch size, otherwise fit 
-	# predict throw errors
+	# and predict throw errors
 	X_train = np.array(X_train[0: len(X_train) - (len(X_train) % batch_size)])
 	y_train = np.array(y_train[0: len(y_train) - (len(y_train) % batch_size)])
 	X_test  = np.array(X_test[0: len(X_test) - (len(X_test) % batch_size)])
@@ -83,35 +82,36 @@ def get_data(batch_size):
 
 	return (X_train, y_train), (X_test, y_test) 
 
-def get_model(window_size):
+def get_model(batch_size, window_size):
     
     model = Sequential()
     model.add(LSTM(64, 
-                   batch_input_shape=(32, window_size, 3), 
+                   batch_input_shape=(batch_size, window_size, 3), 
                    return_sequences=False, stateful=False))
     model.add(Activation('relu'))
-    model.add(Dropout(0.25))
+    model.Add(Dropout(0.25))
     model.add(Dense(6))
     model.add(Activation('softmax'))
     
     model.compile(optimizer='rmsprop',
               loss='categorical_crossentropy',
               metrics=['accuracy'])
-    
     return model
 
 def main():
 
-	(X_train, y_train), (X_test, y_test) = get_data(32)
+	batch_size = 32
+	window_size = 20 * 3 # 20hz sample rate, so we use a few seconds worth of data
 
-	# number of training samples must be a multiple of the batch size (32)
-	model = get_model(60) # window size of 60 (3 seconds of accelerometer data @ 20hz)
+	(X_train, y_train), (X_test, y_test) = get_data(batch_size, window_size)
+
+	model = get_model(batch_size, window_size) # window size of 60 (3 seconds of accelerometer data @ 20hz)
 	# add the weight animator image_saver_callback to save image sequences each 100 batches
-	callbacks = [image_saver_callback(model, '../data/wisdm', interval=100, cmap='bwr', render_videos=True)]
+	callbacks = [image_saver_callback(model, '../data/wisdm', epoch_interval=1, batch_interval=100, cmap='bwr', render_videos=True)]
 	
 	# fit and evaluate our model
 	print('FITTING MODEL')
-	history = model.fit(X_train, y_train, epochs=2, shuffle=True, callbacks=callbacks)
+	history = model.fit(X_train, y_train, batch_size=batch_size, epochs=2, shuffle=True, callbacks=callbacks)
 	score = model.evaluate(X_test, np.array(y_test))
 	print(score)
 
