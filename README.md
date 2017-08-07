@@ -78,17 +78,37 @@ python wisdm.py
 
 ## Thoughts
 
-Using a bash script to leverage parallel, ImageMagick, and FFMPEG isn't necessarily the most elegant solution, but its the one I had time for. The goal of this here lil' project was to write a quick tool that allows me to better understand how weights change over mini-batch updates in a variety of neural networks. Perhaps in the future I will come back and clean up some of the inelegancies. If you have interest in contributing or maintaining a cleaner version of this lib, please [reach out](mailto: brannon@brannondorsey.com). 
+Using a bash script to leverage parallel, ImageMagick, and FFMPEG isn't necessarily the most elegant solution, but its the one I had time for. The goal of this here lil' project was to write a quick tool that allows me to better understand how weights change over mini-batch updates in a variety of neural networks. Perhaps in the future I will come back and clean up some of the inelegancies. If you have interest in contributing or maintaining a cleaner version of this lib, please reach out at <brannon@brannondorsey.com>. 
 
 ## Attribution and License
 
-This module is © Brannon Dorsey 2017, released under an ♥ MIT License ♥. You are free to use, modify, distribute, sell, etc... this software under [those terms](LICENSE). Example data is from the WIreless Sensor Datamining Actitracker dataset published by Fordham University:
+This module is © Brannon Dorsey 2017, released under an ♥ MIT License ♥. You are free to use, modify, distribute, sell, etc... this software under [those terms](LICENSE). 
+
+Example data is from the WIreless Sensor Datamining (WISDM) Actitracker dataset published by Fordham University:
 
 ```
 Jennifer R. Kwapisz, Gary M. Weiss and Samuel A. Moore (2010). Activity Recognition using Cell Phone Accelerometers, Proceedings of the Fourth International Workshop on Knowledge Discovery from Sensor Data (at KDD-10), Washington DC. [PDF]
 ```
 
-GNU Parallel is adamant about citation to the point of excession IMHO, but for what its worth, here is their bibtex:
+This idea is tangentially inspired by much of the work on [Visualizing and Understanding Recurrent Networks](https://arxiv.org/abs/1506.02078) by Andrej Karpathy, Justin Johnson, and Fei-Fei Li.
+
+```
+@article{DBLP:journals/corr/KarpathyJL15,
+  author    = {Andrej Karpathy and
+               Justin Johnson and
+               Fei{-}Fei Li},
+  title     = {Visualizing and Understanding Recurrent Networks},
+  journal   = {CoRR},
+  volume    = {abs/1506.02078},
+  year      = {2015},
+  url       = {http://arxiv.org/abs/1506.02078},
+  timestamp = {Wed, 07 Jun 2017 14:42:54 +0200},
+  biburl    = {http://dblp.uni-trier.de/rec/bib/journals/corr/KarpathyJL15},
+  bibsource = {dblp computer science bibliography, http://dblp.org}
+}
+```
+
+GNU Parallel is adamant about citation to the point of excess IMHO, but for what its worth, here is their bibtex:
 
 ```
 @article{Tange2011a,
